@@ -115,4 +115,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+import os
+
+# Статикалык файлдар үчүн шилтеме
 STATIC_URL = 'static/'
+
+# Render серверинде файлдар чогултула турган папка
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Эгер сизде өзүнчө static папкаңыз болсо, аны да көрсөтүп коюңуз
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# Render'де статикалык файлдарды иштетүү үчүн WhiteNoise колдонуу
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Бул сапты SecurityMiddleware'ден кийин кошуңуз
+    # ... башка middleware'лер
+]
